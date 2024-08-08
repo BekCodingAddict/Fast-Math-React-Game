@@ -23,6 +23,7 @@ const canculateSum = (a, operator, b) => {
 };
 
 function Playing() {
+  const [options, setOptions] = useState([]);
   const [level, setLevel] = useState(1);
   const [operator, setOperator] = useState(1);
   const [values, setValues] = useState({
@@ -54,11 +55,28 @@ function Playing() {
       </div>
 
       <div className="flex h-2/5 w-full items-center justify-center bg-slate-400">
-        <p className="font-serif text-[2rem] font-extrabold text-green-950 md:text-[5rem]">
+        <p className="text-[2rem] font-extrabold text-green-950 md:text-[5rem]">
           {values.value1} {handleSelectOperator(operator)}
           {values.value2} =
           {canculateSum(Number(values.value1), operator, Number(values.value2))}
         </p>
+      </div>
+
+      <div className="flex h-3/5 w-full items-center justify-center bg-teal-400">
+        <div className="ml-4 mr-4 flex w-3/4 flex-col items-center justify-center gap-10">
+          {Array.from({ length: 4 }, (_, i) => i + 1).map((num) => (
+            <button
+              key={num}
+              className="flex w-full items-center justify-center rounded-full bg-green-900 pb-3 pt-3 text-[1.3rem] font-semibold"
+            >
+              {canculateSum(
+                Number(values.value1),
+                operator,
+                Number(values.value2),
+              )}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
